@@ -252,11 +252,12 @@ router.post(
  * @param - /user/me
  */
 
-router.get("/me", auth, async(req, res) => {
+//router.get("/me", auth, async(req, res) => {
+router.post("/me", async(req, res) => {
     try {
         // request.user is getting fetched from Middleware after token authentication
-        const user = await User.findById(req.user.id);
-        res.json(user);
+        const user = await User.find({"email":req.body.email});
+        res.json(user[0]);
     } catch (e) {
         res.send({ message: "Error in Fetching user" });
     }
