@@ -275,7 +275,11 @@ router.post("/payment", async(req, res) => {
                 // await payment.save();
                 savePaymentToMongo(req.body.email, req.body.amount, charge["id"]);
                 //console.log('data from client : ' + req.body.amount + ' ' + req.body.currency + " email : " + req.body.email);
-                res.send(charge);
+                res.send({
+                    "message":"Your Payment is successfully Accepted.Please check your email for a receipt.",
+                    "success":"true"
+                })
+                //res.send(charge);
                 //console.log('Response from function : ' + charge["id"]);
             })
             .catch(err => {
