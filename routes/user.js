@@ -153,6 +153,7 @@ router.post(
         }
 
         const { email } = req.body;
+        console.log("Sending forget password for :"+req.body.email);
         try {
             let user = await User.findOne({
                 email
@@ -168,7 +169,7 @@ router.post(
             await User.updateOne({ "email": email }, { $set: { "password": newPassword } });
             sendForgotPassEmail(email, resetToken)
             res.status(200).json({
-                "message": "Password changed temporary. It is recommended that you reset password.",
+                "message": "Your Password is set to temporary. Please check your email for the new Password. It is recommended that you reset password.",
                 "password": resetToken
             });
         } catch (e) {
